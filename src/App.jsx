@@ -41,8 +41,8 @@ const GalleryContent = styled.section`
 const App = () => {
   const [galleryPhotos, setGalleryPhotos] = useState(photos);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [selectedTag, setSelectedTag] = useState(null);
-  const [textFilter, setTextFilter] = useState(null);
+  const [tag, setTag] = useState(null);
+  const [filter, setFilter] = useState('');
 
   const handleFavoritePhoto = (photo) => {
     if (photo.id === selectedPhoto?.id) {
@@ -63,32 +63,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (selectedTag) {
-      if (selectedTag.id === 0) {
-        setGalleryPhotos(photos);
-      } else {
-        setGalleryPhotos(
-          photos.filter((photo) => photo?.tagId === selectedTag?.id),
-        );
-      }
-    }
-  }, [selectedTag]);
-
-  useEffect(() => {
-    if (textFilter?.length > 0) {
-      setGalleryPhotos(
-        photos.filter((photo) =>
-          photo.titulo.toLocaleLowerCase().startsWith(textFilter),
-        ),
-      );
-    } else setGalleryPhotos(photos);
-  }, [textFilter]);
+    const filteredPhotos = photos.filter((photo) => {
+      const filterByTag = !tag || photo.tagId === tag;
+      const filterByTitle =
+        !filter || photo.titulo.toLowerCase().includes(filter.toLowerCase());
+      return filterByTag && filterByTitle;
+    });
+    setGalleryPhotos(filteredPhotos);
+  }, [filter, tag]);
 
   return (
     <GradientBackground>
       <GlobalStyles />
       <AppContainer>
-        <Header setTextFilter={setTextFilter} />
+        <Header setFilter={setFilter} />
         <MainContainer>
           <SideBar />
           <GalleryContent>
@@ -99,7 +87,7 @@ const App = () => {
             <Gallery
               handleSelectedPhoto={(photo) => setSelectedPhoto(photo)}
               handleFavoritePhoto={handleFavoritePhoto}
-              setSelectedTag={setSelectedTag}
+              setTag={setTag}
               photos={galleryPhotos}
             />
           </GalleryContent>

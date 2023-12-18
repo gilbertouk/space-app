@@ -6,7 +6,7 @@ const FooterStylized = styled.footer`
   justify-content: space-between;
   align-items: center;
   background: #04244f;
-  padding: 22px 46px;
+  padding: 22px;
 
   p {
     color: #fff;

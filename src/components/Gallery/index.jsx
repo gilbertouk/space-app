@@ -25,11 +25,11 @@ const Gallery = ({
   photos = [],
   handleSelectedPhoto,
   handleFavoritePhoto,
-  setSelectedTag,
+  setTag,
 }) => {
   return (
     <>
-      <Tags setSelectedTag={setSelectedTag} />
+      <Tags setTag={setTag} />
       <GalleryContainer>
         <FluidSection>
           <Title>Navegue pela galeria</Title>

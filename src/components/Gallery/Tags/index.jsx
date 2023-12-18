@@ -31,7 +31,7 @@ const Tag = styled.button`
   }
 `;
 
-const Tags = ({ setSelectedTag }) => {
+const Tags = ({ setTag }) => {
   return (
     <TagsContainer>
       <TagTitle>Busque por tags:</TagTitle>
@@ -39,7 +39,7 @@ const Tags = ({ setSelectedTag }) => {
         <Tag
           key={tag.id}
           onClick={() => {
-            setSelectedTag(tag);
+            setTag(tag.tag);
           }}
         >
           {tag.titulo}
