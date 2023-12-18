@@ -37,7 +37,12 @@ const SearchIcon = styled.img`
 const InputText = (props) => {
   return (
     <StylizedContainer>
-      <StylizedInputText placeholder="O que você procura?" {...props} />
+      <StylizedInputText
+        placeholder="O que você procura?"
+        onChange={(e) => {
+          props.setTextFilter(e.target.value.toLocaleLowerCase());
+        }}
+      />
       <SearchIcon src={search} alt="search icon" />
     </StylizedContainer>
   );

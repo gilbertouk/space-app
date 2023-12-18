@@ -10,11 +10,11 @@ const StylizedHeader = styled.header`
   }
 `;
 
-const Header = () => {
+const Header = ({ setTextFilter }) => {
   return (
     <StylizedHeader>
       <img src="/image/logo.png" alt="" />
-      <InputText />
+      <InputText setTextFilter={setTextFilter} />
     </StylizedHeader>
   );
 };
